@@ -36,14 +36,13 @@
 
 - belongs_to :user
 - has_one :order
-- belongs_to :category_id
-- belongs_to :sales_status_id
-- belongs_to :shopping_fee_status_id
-- belongs_to :prefecture_id
-- belongs_to :scheduled_delivery_id
+- belongs_to :category
+- belongs_to :sales_status
+- belongs_to :shopping_fee_status
+- belongs_to :prefecture
+- belongs_to :scheduled_delivery
 
-### include ActiveHash::Associations
-- belongs :prefecture
+
 
 ## orders テーブル
 
@@ -65,7 +64,7 @@
 | ------------- | ---------- | ------------------------------ |
 | order         | references  | null: false, foreign_key: true |
 | post_code     | string     | null: false                    |
-| prefecture_id | integer    | null: false,                   |
+| prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | adresses      | string     | null: false                    |
 | building      | string     |                                |
@@ -74,4 +73,3 @@
 ### Association
 - belongs_to :order
 - belongs_to :prefecture_id
-
