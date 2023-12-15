@@ -1,5 +1,7 @@
 class Item < ApplicationRecord
   has_one_attached :image
+  belongs_to :user
+  has_one :order
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -8,8 +10,8 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :scheduled_delivery
 
-  validates :name, presence: true
-  validates :info, presence: true
+  validates :name, presence: true, length: { minimum: 1, maximum: 40 }
+  validates :info, presence: true, length: { minimum: 1, maximum: 1000 }
   validates :image, presence: true
 
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}

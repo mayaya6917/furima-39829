@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const tax = calculateTax(price);
     const profit = calculateProfit(price);
 
-    addTaxDom.innerHTML = `¥${tax}`;
-    profitDom.innerHTML = `¥${profit}`;
+    addTaxDom.innerHTML = `${tax}`;
+    profitDom.innerHTML = `${profit}`;
   });
 
   function calculateTax(price) {
