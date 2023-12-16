@@ -38,27 +38,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it 'category_idが空では保存できない' do
-        @item.category_id = ''
+        @item.category_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it 'sales_status_idが空では保存できない' do
-        @item.sales_status_id = ''
+        @item.sales_status_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Sales status can't be blank")
       end
       it 'shopping_fee_status_idが空では保存できない' do
-        @item.shopping_fee_status_id = ''
+        @item.shopping_fee_status_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Shopping fee status can't be blank")
       end
       it 'prefecture_idが空では保存できない' do
-        @item.prefecture_id = ''
+        @item.prefecture_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'scheduled_delivery_idが空では保存できない' do
-        @item.scheduled_delivery_id = ''
+        @item.scheduled_delivery_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
       end
@@ -76,6 +76,11 @@ RSpec.describe Item, type: :model do
         @item.price = '10000000'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+      it 'priseが全角入力だと保存できない' do
+        @item.price = '５００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it 'userが紐付いていないと保存できない' do
         @item.user = nil
