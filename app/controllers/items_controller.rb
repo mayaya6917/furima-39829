@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update]
-  before_action :require_permission, only: [:edit, :update]
   before_action :set_item, only: [:edit, :update, :show]
+  before_action :require_permission, only: [:edit, :update]
+
 
 
   def index
@@ -42,7 +43,6 @@ class ItemsController < ApplicationController
   end
 
   def require_permission
-    @item = Item.find(params[:id])
     unless current_user == @item.user
       redirect_to root_path
     end
