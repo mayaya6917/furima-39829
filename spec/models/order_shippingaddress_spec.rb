@@ -6,8 +6,6 @@ RSpec.describe OrderShippingAddress, type: :model do
       @user = FactoryBot.create(:user)
       @item = FactoryBot.create(:item)
       @order_shipping_address = FactoryBot.build(:order_shipping_address, user_id: @user.id, item_id: @item.id)
-      # KeyError:
-      #   Factory not registered: "order_shipping_address"
     end
 
     context '内容に問題ない場合' do
@@ -61,6 +59,31 @@ RSpec.describe OrderShippingAddress, type: :model do
         @order_shipping_address.token = nil
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it "電話番号が空では購入できないこと" do
+        @order_shipping_address.phone_number = ''
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Phone number can't be blank")
+      end
+      it "電話番号が9桁以下では購入できないこと" do
+        @order_shipping_address.phone_number = '12345678'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Phone number input only number")
+      end
+      it "電話番号が12桁以上では購入できないこと" do
+        @order_shipping_address.phone_number = '123456789012'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Phone number input only number")
+      end
+      it "userが紐付いていなければ購入できないこと" do
+        @order_shipping_address.user_id = nil
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("User can't be blank")
+      end
+      it "itemが紐付いていなければ購入できないこと" do
+        @order_shipping_address.item_id = nil
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
