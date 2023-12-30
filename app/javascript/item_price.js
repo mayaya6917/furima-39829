@@ -1,15 +1,9 @@
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('turbo:load', () => {
   const priceInput = document.getElementById("item-price");
-
-  if (priceInput) {
-    priceInput.addEventListener("input", () => {
-      const addTaxDom = document.getElementById("add-tax-price");
-      addTaxDom.innerHTML = Math.floor(priceInput.value * 0.1);
-
-      const addProfitDom = document.getElementById("profit");
-      addProfitDom.innerHTML = Math.floor(priceInput.value - Math.round(priceInput.value * 0.1));
-    });
-  } else {
-    console.error("Element with id 'item-price' not found");
-  }
+  priceInput.addEventListener("input", () => {
+    const addTaxDom = document.getElementById("add-tax-price");
+    addTaxDom.innerHTML = Math.round(priceInput.value * 0.1 );
+    const addProfitDom = document.getElementById("profit");
+    addProfitDom.innerHTML = Math.round(priceInput.value - Math.round(priceInput.value * 0.1 ))
+ })
 });
